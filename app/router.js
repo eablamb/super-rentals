@@ -7,6 +7,11 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('about');
+  this.route('contact');
+  this.route('rentals');
+  // 'index' is a special route that does not require a mapping.
+  // it implicitly handles the root URI ('/')
 });
 
 export default Router;
