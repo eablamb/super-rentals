@@ -26,6 +26,7 @@ export default Component.extend({
         if (filterResults.query === this.get('value')) {
           this.set('results', filterResults.results);
         }
+      });
     }
   }
 
