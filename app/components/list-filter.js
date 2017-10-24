@@ -8,6 +8,9 @@ export default Component.extend({
     this._super(...arguments);
     // seed initial entries by calling filter with an empty value
     this.get('filter')('').then((results) => this.set('results', results));
+    this.get('filter')('').then((allResults) => {
+      this.set('results', allResults.results);
+    });
   },
 
   actions: {
@@ -19,7 +22,10 @@ export default Component.extend({
       // that represents the result of an asynchronous function.  Since filterAction
       // may not return a result immediately, `then' will wait until it receives the result
       // to execute its code.
-      filterAction(filterInputValue).then((filterResults) => this.set('results', filterResults));
+      filterAction(filterInputValue).then((filterResults) => {
+        if (filterResults.query === this.get('value')) {
+          this.set('results', filterResults.results);
+        }
     }
   }
 
