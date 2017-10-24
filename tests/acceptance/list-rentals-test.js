@@ -52,6 +52,17 @@ test('should list available rentals.', function (assert) {
 });
 
 test('should filter the list of rentals by city.', function (assert) {
+  visit('/');
+  // Fills in the value 'Seattle' in the list-filter bar
+  fillIn('.list-filter input', 'Seattle');
+  // Simulates typing an 'e' key (69) on the list-filter bar
+  keyEvent('.list-filter input', 'keyup', 69);
+  andThen(function() {
+    // find all elements of class '.listing' (our rental-listing components), and assert there is only 1
+    assert.equal(find('.listing').length, 1, 'should show 1 listing');
+    // Assert the single listing is for Seattle
+    assert.equal(find('.listing .location:contains("Seattle")').length, 1, 'should contain 1 listing with location Seattle');
+  });
 });
 
 test('should show details for a selected rental', function (assert) {
