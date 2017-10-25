@@ -1,12 +1,26 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'super-rentals/tests/helpers/module-for-acceptance';
+import Service from '@ember/service';
 
 // Acceptance tests automate various scenarios where the user navigates through
 // the website.  They are 'end-to-end' tests, as opposed to integration and unit
 // tests.
 
+// Stub the maps service in our acceptance tests so we don't have
+// to make costly Google API calls for our tests
+let StubMapsService = Service.extend({
+  getMapElement() {
+    return document.createElement('div');
+  }
+});
+
 // Sets up the acceptance test
-moduleForAcceptance('Acceptance | list rentals');
+moduleForAcceptance('Acceptance | list rentals', {
+  beforeEach() {
+    this.application.register('service:stubMaps', StubMapsService);
+    this.application.inject('component:location-map', 'maps', 'service:stubMaps');
+  }
+});
 
 // the `assert' object tests for various conditions
 // QUnit requires at least one check from assert, otherwise the test will
