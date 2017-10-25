@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import EmberObject from '@ember/object';
 
+// Use the google-maps util as `MapUtil'
 import MapUtil from '../utils/google-maps';
 
 export default Service.extend({
