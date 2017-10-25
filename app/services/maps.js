@@ -1,3 +1,4 @@
+/* global Ember */
 import Service from '@ember/service';
 import EmberObject from '@ember/object';
 
